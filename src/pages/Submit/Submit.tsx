@@ -5,6 +5,7 @@ import { FormProvider, useForm, useWatch } from "react-hook-form";
 import { FormFieldType } from "../../types/FormFieldType.type";
 import { usePostFormsSubmit } from "../../apis/PostFormsSubmit";
 import { toast } from "react-toastify";
+import { Reorder } from "motion/react";
 
 function Submit() {
   const [formFields, setFormFields] = useState<FormFieldType[]>([]);
@@ -66,9 +67,13 @@ function Submit() {
             </select>
           </div>
 
-          {formFields.map((i, index) => (
-            <FormBuilder key={index} props={i} />
-          ))}
+          <Reorder.Group axis="y" values={formFields} onReorder={setFormFields}>
+            {formFields.map((i) => (
+              <Reorder.Item key={i.id} value={i}>
+                <FormBuilder props={i} />
+              </Reorder.Item>
+            ))}
+          </Reorder.Group>
 
           <button
             className="px-10 py-4 bg-green-300 transition-colors hover:bg-green-400 active:bg-green-400 focus:bg-green-400 cursor-pointer"
