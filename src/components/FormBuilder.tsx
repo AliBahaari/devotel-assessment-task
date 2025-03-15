@@ -26,6 +26,8 @@ function FormBuilder({ props }: FormBuilderProps) {
       } else if (props.options) {
         setValue(props.id, props.options[0]);
       }
+    } else if (props.type === "number") {
+      setValue(props.id, 0);
     }
   }, [
     getDynamicData?.states,

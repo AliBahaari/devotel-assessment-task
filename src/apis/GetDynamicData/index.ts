@@ -18,7 +18,7 @@ export function useGetDynamicData({
   value,
 }: GetDynamicDataProps) {
   return useQuery({
-    queryKey: [TQ_QUERIES.GET_STATES, value],
+    queryKey: [TQ_QUERIES.GET_DYNAMIC_DATA, value],
     queryFn: async () => {
       const { data } = await axiosInstance({
         url: `${endpoint}?${dependsOn}=${value}`,
