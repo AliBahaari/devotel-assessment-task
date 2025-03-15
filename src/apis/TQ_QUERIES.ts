@@ -1,0 +1,4 @@
+export const TQ_QUERIES = {
+  GET_FORMS: "GET_FORMS",
+  GET_STATES: "GET_STATES",
+};
