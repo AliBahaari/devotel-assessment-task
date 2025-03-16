@@ -18,6 +18,7 @@ function Submit() {
   const location = useLocation();
 
   const [formFields, setFormFields] = useState<FormFieldType[]>([]);
+  console.log("🚀 ~ Submit ~ formFields:", formFields);
 
   const { data: getFormsData, isSuccess: getFormsIsSuccess } = useGetForms();
   const { mutateAsync: postFormsSubmit, isPending: postFormsSubmitIsPending } =
