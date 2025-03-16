@@ -18,6 +18,8 @@ export const translations = {
     maximum_is: "maximum is",
     welcome: "Welcome",
     which_columns_to_display: "Which columns to display",
+    please_choose_a_section_by_clicking_on_the_buttons_below:
+      "Please choose a section by clicking on the buttons below",
   },
   ge: {
     darkMode: "Dunkelmodus",
@@ -38,5 +40,7 @@ export const translations = {
     maximum_is: "maximum ist",
     welcome: "Willkommen",
     which_columns_to_display: "Welche Spalten sollen angezeigt werden",
+    please_choose_a_section_by_clicking_on_the_buttons_below:
+      "Bitte wählen Sie einen Abschnitt aus, indem Sie auf die Schaltflächen unten klicken",
   },
 };

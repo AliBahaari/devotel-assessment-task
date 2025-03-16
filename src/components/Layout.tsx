@@ -69,6 +69,13 @@ function Layout() {
       <h1 className="text-3xl mt-4 font-black">
         {translations[language].welcome}!
       </h1>
+      <p>
+        {
+          translations[language]
+            .please_choose_a_section_by_clicking_on_the_buttons_below
+        }
+        :
+      </p>
 
       <div className="flex flex-row items-center justify-center gap-6 mt-4">
         {buttonLinks.map((i, index) => (
