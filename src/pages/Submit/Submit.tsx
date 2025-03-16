@@ -15,7 +15,8 @@ function Submit() {
   const [formFields, setFormFields] = useState<FormFieldType[]>([]);
 
   const { data: getFormsData, isSuccess: getFormsIsSuccess } = useGetForms();
-  const { mutateAsync: postFormsSubmit } = usePostFormsSubmit();
+  const { mutateAsync: postFormsSubmit, isPending: postFormsSubmitIsPending } =
+    usePostFormsSubmit();
 
   const formProvider = useForm({
     mode: "onChange",
@@ -94,6 +95,7 @@ function Submit() {
             </Reorder.Group>
 
             <button
+              disabled={postFormsSubmitIsPending}
               className="px-10 py-4 bg-green-400 transition-colors rounded-sm hover:bg-green-500 active:bg-green-500 focus:bg-green-500 cursor-pointer"
               type="submit"
             >
