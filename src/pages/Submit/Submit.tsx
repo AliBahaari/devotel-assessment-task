@@ -33,7 +33,7 @@ function Submit() {
 
   useEffect(() => {
     formProvider.setValue("insuranceType", getFormsData?.[0]?.formId || "");
-  }, [formProvider, getFormsData]);
+  }, [formProvider, getFormsData, location.pathname]);
 
   const { insuranceType } = useWatch({
     control: formProvider.control,
