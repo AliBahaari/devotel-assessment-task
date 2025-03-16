@@ -9,7 +9,6 @@ import { Reorder } from "motion/react";
 import { translations } from "../../configs/translations";
 import { useLocalizationStore } from "../../stores/useLocalizationStore";
 import { useDarkModeStore } from "../../stores/useDarkModeStore";
-import { useLocation } from "react-router";
 
 function Submit() {
   const darkMode = useDarkModeStore((state) => state.darkMode);
@@ -21,8 +20,6 @@ function Submit() {
   const { mutateAsync: postFormsSubmit, isPending: postFormsSubmitIsPending } =
     usePostFormsSubmit();
 
-  const location = useLocation();
-
   const formProvider = useForm({
     mode: "onChange",
     defaultValues: {
@@ -32,22 +29,19 @@ function Submit() {
   });
 
   useEffect(() => {
-    console.log(getFormsData?.[0]?.formId);
     formProvider.setValue("insuranceType", getFormsData?.[0]?.formId || "");
-  }, [formProvider, getFormsData, location]);
+  }, [formProvider, getFormsData]);
 
   const { insuranceType } = useWatch({
     control: formProvider.control,
   });
 
   useEffect(() => {
-    console.log(getFormsIsSuccess, getFormsData, insuranceType);
+    formProvider.reset({
+      insuranceType: formProvider.getValues().insuranceType,
+      country: formProvider.getValues().country,
+    });
     if (getFormsIsSuccess && getFormsData && insuranceType) {
-      formProvider.reset({
-        insuranceType: formProvider.getValues().insuranceType,
-        country: formProvider.getValues().country,
-      });
-
       const selectedFormFields = getFormsData.find(
         (i) => i.formId === insuranceType,
       )!.fields;
