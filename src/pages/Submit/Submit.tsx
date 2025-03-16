@@ -24,6 +24,7 @@ function Submit() {
     mode: "onChange",
     defaultValues: {
       insuranceType: "",
+      country: "",
     },
   });
 
@@ -39,6 +40,7 @@ function Submit() {
     if (getFormsIsSuccess && getFormsData && insuranceType) {
       formProvider.reset({
         insuranceType: formProvider.getValues().insuranceType,
+        country: formProvider.getValues().country,
       });
 
       const selectedFormFields = getFormsData.find(
