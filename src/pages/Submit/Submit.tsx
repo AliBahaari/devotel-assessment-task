@@ -9,10 +9,13 @@ import { Reorder } from "motion/react";
 import { translations } from "../../configs/translations";
 import { useLocalizationStore } from "../../stores/useLocalizationStore";
 import { useDarkModeStore } from "../../stores/useDarkModeStore";
+import { useLocation } from "react-router";
 
 function Submit() {
   const darkMode = useDarkModeStore((state) => state.darkMode);
   const language = useLocalizationStore((state) => state.language);
+
+  const location = useLocation();
 
   const [formFields, setFormFields] = useState<FormFieldType[]>([]);
 
@@ -49,7 +52,13 @@ function Submit() {
 
       setFormFields(selectedFormFields);
     }
-  }, [getFormsIsSuccess, getFormsData, insuranceType, formProvider]);
+  }, [
+    getFormsIsSuccess,
+    getFormsData,
+    insuranceType,
+    formProvider,
+    location.pathname,
+  ]);
 
   const onSubmit = async (values: unknown) => {
     const { status } = await postFormsSubmit(values);
