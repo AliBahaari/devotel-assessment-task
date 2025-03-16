@@ -3,12 +3,15 @@ import { useGetDynamicData } from "../apis/GetDynamicData";
 import { FormFieldType } from "../types/FormFieldType.type";
 import { checkCondition } from "../utils/checkCondition";
 import { useEffect } from "react";
+import { useDarkModeStore } from "../stores/useStore";
 
 type FormBuilderProps = {
   props: FormFieldType;
 };
 
 function FormBuilder({ props }: FormBuilderProps) {
+  const darkMode = useDarkModeStore((state) => state.darkMode);
+
   const { register, watch, setValue } = useFormContext();
 
   const { data: getDynamicData } = useGetDynamicData({
@@ -74,7 +77,7 @@ function FormBuilder({ props }: FormBuilderProps) {
       <>
         <h2 className="text-lg">{props.label}</h2>
         <select
-          className="border min-w-sm px-1 py-1"
+          className={`border min-w-sm px-1 py-1 ${darkMode && "text-black border-white"}`}
           {...register(props.id, {
             required: {
               value: props.required,

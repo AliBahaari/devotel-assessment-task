@@ -7,6 +7,7 @@ import {
   type ColumnDef,
 } from "@tanstack/react-table";
 import { useState } from "react";
+import { useDarkModeStore } from "../stores/useStore";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -31,6 +32,8 @@ export function DataTable<TData, TValue>({
   cellClassName = "",
   isLoading,
 }: DataTableProps<TData, TValue>) {
+  const darkMode = useDarkModeStore((state) => state.darkMode);
+
   const [sorting, setSorting] = useState<SortingState>([]);
 
   const table = useReactTable({
@@ -52,7 +55,7 @@ export function DataTable<TData, TValue>({
       pageNumbers.push(
         <div
           onClick={() => onPageChange(i)}
-          className={`${i === currentPage ? "bg-slate-400 text-white" : "bg-slate-200"} cursor-pointer w-10 h-10 flex justify-center items-center`}
+          className={`${i === currentPage ? (darkMode ? "bg-slate-500" : "bg-slate-300") : ""} rounded-full cursor-pointer w-10 h-10 flex justify-center items-center`}
           key={i}
         >
           <span>{i}</span>
@@ -72,7 +75,7 @@ export function DataTable<TData, TValue>({
                 return (
                   <th
                     key={header.id}
-                    className="text-center text-[14px] text-[#707070]"
+                    className={`text-center text-[14px] ${darkMode ? "text-white" : "text-[#707070]"}`}
                     onClick={header.column.getToggleSortingHandler()}
                     style={{
                       cursor: header.column.getCanSort()
@@ -118,7 +121,7 @@ export function DataTable<TData, TValue>({
                 className={`${rowClassName} border-b-[1px] border-solid border-gray-400`}
               >
                 {row.getVisibleCells().map((cell) => (
-                  <td key={cell.id} className={`border ${cellClassName}`}>
+                  <td key={cell.id} className={`${cellClassName}`}>
                     <div className="my-3 line-clamp-2 text-center">
                       {flexRender(
                         cell.column.columnDef.cell,
@@ -140,10 +143,14 @@ export function DataTable<TData, TValue>({
       </table>
 
       {totalRows > pageSize && (
-        <div className="grid grid-cols-3 space-x-2 bg-slate-100 px-[20px] py-[16px]">
+        <div
+          className={`${darkMode ? "bg-slate-400" : "bg-slate-100"} grid grid-cols-3 space-x-2 px-[20px] py-[16px]`}
+        >
           <div className="flex flex-row items-center gap-2 text-[14px]">
             <span>Page</span>
-            <div className="flex h-[38px] w-[46px] items-center justify-center rounded-[8px] border border-slate-300 bg-white">
+            <div
+              className={`${darkMode ? "border-slate-500" : "border-slate-300"} bg-white text-black flex h-[38px] w-[46px] items-center justify-center rounded-[8px] border`}
+            >
               <span className="text-[16px] font-bold">{currentPage}</span>
             </div>
             <span>from</span>

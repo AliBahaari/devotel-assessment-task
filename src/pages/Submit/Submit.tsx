@@ -76,7 +76,7 @@ function Submit() {
           </Reorder.Group>
 
           <button
-            className="px-10 py-4 bg-green-300 transition-colors hover:bg-green-400 active:bg-green-400 focus:bg-green-400 cursor-pointer"
+            className="px-10 py-4 bg-green-400 transition-colors hover:bg-green-500 active:bg-green-500 focus:bg-green-500 cursor-pointer"
             type="submit"
           >
             Submit
@@ -84,7 +84,7 @@ function Submit() {
         </form>
       </FormProvider>
 
-      <div className="my-10">
+      <div className="py-10">
         {Object.values(formProvider.formState.errors).length > 0 &&
           Object.values(formProvider.formState.errors).map((i, index) => (
             <p key={index} className="text-red-500 text-sm">

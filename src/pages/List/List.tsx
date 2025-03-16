@@ -106,7 +106,7 @@ function List() {
       ))}
       <input
         type="text"
-        className="border"
+        className="border min-w-sm px-1 py-1"
         placeholder="Search..."
         onChange={(event) => setSearch(event.target.value)}
       />
