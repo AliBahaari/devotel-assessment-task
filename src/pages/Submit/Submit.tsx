@@ -9,16 +9,12 @@ import { Reorder } from "motion/react";
 import { translations } from "../../configs/translations";
 import { useLocalizationStore } from "../../stores/useLocalizationStore";
 import { useDarkModeStore } from "../../stores/useDarkModeStore";
-import { useLocation } from "react-router";
 
 function Submit() {
   const darkMode = useDarkModeStore((state) => state.darkMode);
   const language = useLocalizationStore((state) => state.language);
 
-  const location = useLocation();
-
   const [formFields, setFormFields] = useState<FormFieldType[]>([]);
-  console.log("🚀 ~ Submit ~ formFields:", formFields);
 
   const { data: getFormsData, isSuccess: getFormsIsSuccess } = useGetForms();
   const { mutateAsync: postFormsSubmit, isPending: postFormsSubmitIsPending } =
@@ -34,13 +30,14 @@ function Submit() {
 
   useEffect(() => {
     formProvider.setValue("insuranceType", getFormsData?.[0]?.formId || "");
-  }, [formProvider, getFormsData, location.pathname]);
+  }, [formProvider, getFormsData]);
 
   const { insuranceType } = useWatch({
     control: formProvider.control,
   });
 
   useEffect(() => {
+    console.log(getFormsData, getFormsData, insuranceType);
     if (getFormsIsSuccess && getFormsData && insuranceType) {
       formProvider.reset({
         insuranceType: formProvider.getValues().insuranceType,
@@ -53,13 +50,7 @@ function Submit() {
 
       setFormFields(selectedFormFields);
     }
-  }, [
-    getFormsIsSuccess,
-    getFormsData,
-    insuranceType,
-    formProvider,
-    location.pathname,
-  ]);
+  }, [getFormsIsSuccess, getFormsData, insuranceType, formProvider]);
 
   const onSubmit = async (values: unknown) => {
     const { status } = await postFormsSubmit(values);
