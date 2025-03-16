@@ -98,7 +98,7 @@ function Submit() {
 
             <button
               disabled={postFormsSubmitIsPending}
-              className="px-10 py-4 bg-green-400 transition-colors rounded-sm hover:bg-green-500 active:bg-green-500 focus:bg-green-500 cursor-pointer"
+              className="px-10 py-4 bg-green-400 transition-colors rounded-sm hover:bg-green-500 active:bg-green-500 focus:bg-green-500 cursor-pointer disabled:!cursor-not-allowed disabled:opacity-50"
               type="submit"
             >
               {translations[language].submit}
