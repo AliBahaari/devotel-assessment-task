@@ -41,7 +41,7 @@ function Submit() {
   });
 
   useEffect(() => {
-    console.log(getFormsData, getFormsData, insuranceType);
+    console.log(getFormsIsSuccess, getFormsData, insuranceType);
     if (getFormsIsSuccess && getFormsData && insuranceType) {
       formProvider.reset({
         insuranceType: formProvider.getValues().insuranceType,
