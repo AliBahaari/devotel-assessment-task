@@ -8,8 +8,10 @@ import { toast } from "react-toastify";
 import { Reorder } from "motion/react";
 import { translations } from "../../configs/translations";
 import { useLocalizationStore } from "../../stores/useLocalizationStore";
+import { useDarkModeStore } from "../../stores/useDarkModeStore";
 
 function Submit() {
+  const darkMode = useDarkModeStore((state) => state.darkMode);
   const language = useLocalizationStore((state) => state.language);
 
   const [formFields, setFormFields] = useState<FormFieldType[]>([]);
@@ -71,7 +73,7 @@ function Submit() {
             <div className="my-4">
               <h2 className="text-lg">Insurance Type</h2>
               <select
-                className="border w-xs sm:w-lg px-1 py-1"
+                className={`border w-xs sm:w-lg px-1 py-1 ${darkMode && "text-gray-400 border-white"}`}
                 {...formProvider.register("insuranceType")}
               >
                 {getFormsData?.map((i, index) => (
