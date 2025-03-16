@@ -32,6 +32,7 @@ function Submit() {
   });
 
   useEffect(() => {
+    console.log(getFormsData?.[0]?.formId);
     formProvider.setValue("insuranceType", getFormsData?.[0]?.formId || "");
   }, [formProvider, getFormsData, location]);
 
