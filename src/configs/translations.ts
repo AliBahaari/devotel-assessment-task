@@ -20,6 +20,7 @@ export const translations = {
     which_columns_to_display: "Which columns to display",
     please_choose_a_section_by_clicking_on_the_buttons_below:
       "Please choose a section by clicking on the buttons below",
+    you_can_reorder_the_fields: "You can reorder the fields",
   },
   ge: {
     darkMode: "Dunkelmodus",
@@ -42,5 +43,6 @@ export const translations = {
     which_columns_to_display: "Welche Spalten sollen angezeigt werden",
     please_choose_a_section_by_clicking_on_the_buttons_below:
       "Bitte wählen Sie einen Abschnitt aus, indem Sie auf die Schaltflächen unten klicken",
+    you_can_reorder_the_fields: "Sie können die Felder neu anordnen",
   },
 };

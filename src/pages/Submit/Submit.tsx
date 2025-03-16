@@ -85,6 +85,9 @@ function Submit() {
               </select>
             </div>
 
+            <p className="mt-10 italic">
+              {translations[language].you_can_reorder_the_fields}.
+            </p>
             <Reorder.Group
               axis="y"
               values={formFields}
