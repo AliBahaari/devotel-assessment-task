@@ -2,6 +2,8 @@ import { ColumnDef } from "@tanstack/react-table";
 import { useGetFormsSubmissions } from "../../apis/GetFormsSubmissions";
 import { DataTable } from "../../components/DataTable";
 import { useEffect, useMemo, useState } from "react";
+import { useLocalizationStore } from "../../stores/useLocalizationStore";
+import { translations } from "../../configs/translations";
 
 type TableType = {
   "Full Name": string;
@@ -18,6 +20,8 @@ type SelectedColumns = {
 const PAGE_SIZE = 2;
 
 function List() {
+  const language = useLocalizationStore((state) => state.language);
+
   const [selectedColumns, setSelectedColumns] = useState<SelectedColumns[]>([]);
   const [pageNumber, setPageNumber] = useState(1);
   const [search, setSearch] = useState("");
@@ -107,7 +111,7 @@ function List() {
       <input
         type="text"
         className="border min-w-sm px-1 py-1"
-        placeholder="Search..."
+        placeholder={translations[language].search}
         onChange={(event) => setSearch(event.target.value)}
       />
       <DataTable

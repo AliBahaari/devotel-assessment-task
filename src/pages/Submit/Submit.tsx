@@ -6,8 +6,12 @@ import { FormFieldType } from "../../types/FormFieldType.type";
 import { usePostFormsSubmit } from "../../apis/PostFormsSubmit";
 import { toast } from "react-toastify";
 import { Reorder } from "motion/react";
+import { translations } from "../../configs/translations";
+import { useLocalizationStore } from "../../stores/useLocalizationStore";
 
 function Submit() {
+  const language = useLocalizationStore((state) => state.language);
+
   const [formFields, setFormFields] = useState<FormFieldType[]>([]);
 
   const { data: getFormsData, isSuccess: getFormsIsSuccess } = useGetForms();
@@ -45,7 +49,7 @@ function Submit() {
   const onSubmit = async (values: unknown) => {
     const { status } = await postFormsSubmit(values);
     if (status === "success") {
-      toast.success("Form Submitted!");
+      toast.success(`${translations[language].form_submitted}!`);
     }
   };
 
@@ -79,7 +83,7 @@ function Submit() {
             className="px-10 py-4 bg-green-400 transition-colors hover:bg-green-500 active:bg-green-500 focus:bg-green-500 cursor-pointer"
             type="submit"
           >
-            Submit
+            {translations[language].submit}
           </button>
         </form>
       </FormProvider>

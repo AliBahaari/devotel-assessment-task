@@ -7,7 +7,9 @@ import {
   type ColumnDef,
 } from "@tanstack/react-table";
 import { useState } from "react";
-import { useDarkModeStore } from "../stores/useStore";
+import { useDarkModeStore } from "../stores/useDarkModeStore";
+import { translations } from "../configs/translations";
+import { useLocalizationStore } from "../stores/useLocalizationStore";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -32,6 +34,7 @@ export function DataTable<TData, TValue>({
   cellClassName = "",
   isLoading,
 }: DataTableProps<TData, TValue>) {
+  const language = useLocalizationStore((state) => state.language);
   const darkMode = useDarkModeStore((state) => state.darkMode);
 
   const [sorting, setSorting] = useState<SortingState>([]);
@@ -97,7 +100,7 @@ export function DataTable<TData, TValue>({
                         ? " 🔼"
                         : header.column.getIsSorted() === "asc"
                           ? " 🔽"
-                          : "Sort"}
+                          : translations[language].sort}
                     </span>
                   </th>
                 );
@@ -110,7 +113,7 @@ export function DataTable<TData, TValue>({
           {isLoading ? (
             <tr>
               <td colSpan={columns.length} className="py-4 text-center">
-                Loading...
+                {translations[language].loading}...
               </td>
             </tr>
           ) : table.getRowModel().rows.length ? (
@@ -135,7 +138,7 @@ export function DataTable<TData, TValue>({
           ) : (
             <tr>
               <td colSpan={columns.length} className="py-4 text-center">
-                Nothing!
+                {translations[language].nothing}!
               </td>
             </tr>
           )}
@@ -147,13 +150,13 @@ export function DataTable<TData, TValue>({
           className={`${darkMode ? "bg-slate-400" : "bg-slate-100"} grid grid-cols-3 space-x-2 px-[20px] py-[16px]`}
         >
           <div className="flex flex-row items-center gap-2 text-[14px]">
-            <span>Page</span>
+            <span>{translations[language].page}</span>
             <div
               className={`${darkMode ? "border-slate-500" : "border-slate-300"} bg-white text-black flex h-[38px] w-[46px] items-center justify-center rounded-[8px] border`}
             >
               <span className="text-[16px] font-bold">{currentPage}</span>
             </div>
-            <span>from</span>
+            <span>{translations[language].from}</span>
             <span>{totalPages}</span>
           </div>
 
@@ -169,7 +172,7 @@ export function DataTable<TData, TValue>({
                 ${currentPage <= 1 && "!cursor-not-allowed opacity-20"}
               `}
             >
-              Back
+              {translations[language].back}
             </div>
             {renderPageNumbers()}
             <div
@@ -183,7 +186,7 @@ export function DataTable<TData, TValue>({
                 ${currentPage >= totalPages && "!cursor-not-allowed opacity-20"}
               `}
             >
-              Next
+              {translations[language].next}
             </div>
           </div>
         </div>

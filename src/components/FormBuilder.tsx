@@ -3,7 +3,9 @@ import { useGetDynamicData } from "../apis/GetDynamicData";
 import { FormFieldType } from "../types/FormFieldType.type";
 import { checkCondition } from "../utils/checkCondition";
 import { useEffect } from "react";
-import { useDarkModeStore } from "../stores/useStore";
+import { useDarkModeStore } from "../stores/useDarkModeStore";
+import { translations } from "../configs/translations";
+import { useLocalizationStore } from "../stores/useLocalizationStore";
 
 type FormBuilderProps = {
   props: FormFieldType;
@@ -11,6 +13,7 @@ type FormBuilderProps = {
 
 function FormBuilder({ props }: FormBuilderProps) {
   const darkMode = useDarkModeStore((state) => state.darkMode);
+  const language = useLocalizationStore((state) => state.language);
 
   const { register, watch, setValue } = useFormContext();
 
@@ -54,7 +57,7 @@ function FormBuilder({ props }: FormBuilderProps) {
               {...register(props.id, {
                 required: {
                   value: props.required,
-                  message: `"${props.label}" should be filled.`,
+                  message: `"${props.label}" ${translations[language].should_be_filled}.`,
                 },
               })}
             />
@@ -81,7 +84,7 @@ function FormBuilder({ props }: FormBuilderProps) {
           {...register(props.id, {
             required: {
               value: props.required,
-              message: `"${props.label}" should be filled.`,
+              message: `"${props.label}" ${translations[language].should_be_filled}.`,
             },
           })}
         >
@@ -108,12 +111,12 @@ function FormBuilder({ props }: FormBuilderProps) {
           {...register(props.id, {
             required: {
               value: props.required,
-              message: `"${props.label}" should be filled.`,
+              message: `"${props.label}" ${translations[language].should_be_filled}.`,
             },
             ...(props.validation?.pattern && {
               pattern: {
                 value: new RegExp(props.validation?.pattern),
-                message: `"${props.label}" should be followed by ${props.validation.pattern}.`,
+                message: `"${props.label}" ${translations[language].should_be_followed_by} ${props.validation.pattern}.`,
               },
             }),
           })}
@@ -129,7 +132,7 @@ function FormBuilder({ props }: FormBuilderProps) {
           {...register(props.id, {
             required: {
               value: props.required,
-              message: `"${props.label}" should be filled.`,
+              message: `"${props.label}" ${translations[language].should_be_filled}.`,
             },
           })}
         />
@@ -144,15 +147,15 @@ function FormBuilder({ props }: FormBuilderProps) {
           {...register(props.id, {
             required: {
               value: props.required,
-              message: `"${props.label}" should be filled.`,
+              message: `"${props.label}" ${translations[language].should_be_filled}.`,
             },
             min: {
               value: Number(props.validation?.min),
-              message: `"${props.label}" minimum is ${props.validation?.min}.`,
+              message: `"${props.label}" ${translations[language].minimum_is} ${props.validation?.min}.`,
             },
             max: {
               value: Number(props.validation?.max),
-              message: `"${props.label}" maximum is ${props.validation?.max}.`,
+              message: `"${props.label}" ${translations[language].maximum_is} ${props.validation?.max}.`,
             },
           })}
         />
