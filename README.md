@@ -1,54 +1,57 @@
-# React + TypeScript + Vite
+# Devotel Assessment Task
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+I have implemented this project as an assessment task for a company based in the USA.
 
-Currently, two official plugins are available:
+## Installation
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+First, clone the project:
 
-## Expanding the ESLint configuration
+```bash
+git clone https://github.com/AliBahaari/devotel-assessment-task.git
+```
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+Then, install the packages using _npm_:
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ["./tsconfig.node.json", "./tsconfig.app.json"],
-      tsconfigRootDir: import.meta.dirname,
+```bash
+cd devotel-assessment-task
+npm i
+```
+
+After that, run the project:
+
+```bash
+npm run dev
+```
+
+## API Usage
+
+In the project, I've implemented 4 different endpoints. 3 of them are as well as other endpoints, easy-peasy! 1 of them needs to be described!
+You can find the related file in this directory: **/src/apis/GetDynamicData**
+As you can see, _Method_, _Endpoint_, _Query Param_ are dynamic and the _TanStack Query_ hook I've written for handling this kind of operations, covers this.
+
+```javascript
+export function useGetDynamicData({
+  allowed,
+  dependsOn,
+  endpoint,
+  method,
+  value,
+}: GetDynamicDataProps) {
+  return useQuery({
+    queryKey: [TQ_QUERIES.GET_DYNAMIC_DATA, value],
+    queryFn: async () => {
+      const { data } = await axiosInstance({
+        url: `${endpoint}?${dependsOn}=${value}`,
+        method,
+      });
+      return data;
     },
-  },
-});
+    enabled: allowed && !!value,
+  });
+}
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Demo
 
-```js
-// eslint.config.js
-import reactX from "eslint-plugin-react-x";
-import reactDom from "eslint-plugin-react-dom";
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    "react-x": reactX,
-    "react-dom": reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs["recommended-typescript"].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-});
-```
+Check the project out here:
+[Demo](https://devotel-assessment-task.vercel.app)
