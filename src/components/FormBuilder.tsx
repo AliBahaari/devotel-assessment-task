@@ -80,7 +80,7 @@ function FormBuilder({ props }: FormBuilderProps) {
       <>
         <h2 className="text-lg">{props.label}</h2>
         <select
-          className={`border min-w-sm px-1 py-1 ${darkMode && "text-gray-400 border-white"}`}
+          className={`border w-xs sm:w-lg px-1 py-1 ${darkMode && "text-gray-400 border-white"}`}
           {...register(props.id, {
             required: {
               value: props.required,
@@ -106,7 +106,7 @@ function FormBuilder({ props }: FormBuilderProps) {
       <>
         <h2 className="text-lg">{props.label}</h2>
         <input
-          className="border min-w-sm px-1 py-1"
+          className="border w-xs sm:w-lg px-1 py-1"
           type="text"
           {...register(props.id, {
             required: {
@@ -127,7 +127,7 @@ function FormBuilder({ props }: FormBuilderProps) {
       <>
         <h2 className="text-lg">{props.label}</h2>
         <input
-          className="border min-w-sm px-1 py-1"
+          className="border w-xs sm:w-lg px-1 py-1"
           type="date"
           {...register(props.id, {
             required: {
@@ -142,7 +142,7 @@ function FormBuilder({ props }: FormBuilderProps) {
       <>
         <h2 className="text-lg">{props.label}</h2>
         <input
-          className="border min-w-sm px-1 py-1"
+          className="border w-xs sm:w-lg px-1 py-1"
           type="number"
           {...register(props.id, {
             required: {

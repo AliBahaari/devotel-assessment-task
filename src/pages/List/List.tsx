@@ -95,9 +95,11 @@ function List() {
 
   return (
     <>
-      <div className="flex flex-row items-center justify-between">
+      <div className="flex flex-col sm:flex-row gap-10 items-center justify-between">
         <div className="flex flex-col">
-          <span className="font-medium">Which columns to display?</span>
+          <span className="font-medium">
+            {translations[language].which_columns_to_display}?
+          </span>
           <div>
             {getFormsSubmissionsData?.columns.map((i, index) => (
               <div
@@ -120,7 +122,7 @@ function List() {
 
         <input
           type="text"
-          className="border min-w-sm px-1 py-1"
+          className="border w-xs px-1 py-1"
           placeholder={`${translations[language].search}...`}
           onChange={(event) => setSearch(event.target.value)}
         />
@@ -128,6 +130,7 @@ function List() {
 
       <div className="mt-10">
         <DataTable
+          cellClassName="min-w-[150px]"
           columns={columns || []}
           data={data || []}
           isLoading={getFormsSubmissionsIsFetching}

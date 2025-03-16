@@ -55,46 +55,52 @@ function Submit() {
 
   return (
     <div className="flex flex-col items-center">
-      <div>
-        {Object.values(formProvider.formState.errors).length > 0 &&
-          Object.values(formProvider.formState.errors).map((i, index) => (
-            <p key={index} className="text-red-500 text-sm">
-              {String(i?.message)}
-            </p>
-          ))}
-      </div>
-
       <FormProvider {...formProvider}>
-        <form onSubmit={formProvider.handleSubmit(onSubmit)}>
-          <div className="my-4">
-            <h2 className="text-lg">Insurance Type</h2>
-            <select
-              className="border min-w-sm px-1 py-1"
-              {...formProvider.register("insuranceType")}
-            >
-              {getFormsData?.map((i, index) => (
-                <option key={index} value={i.formId}>
-                  {i.title}
-                </option>
+        <div className="w-xs sm:w-lg">
+          <div>
+            {Object.values(formProvider.formState.errors).length > 0 &&
+              Object.values(formProvider.formState.errors).map((i, index) => (
+                <p key={index} className="text-red-500 text-sm">
+                  {String(i?.message)}
+                </p>
               ))}
-            </select>
           </div>
 
-          <Reorder.Group axis="y" values={formFields} onReorder={setFormFields}>
-            {formFields.map((i) => (
-              <Reorder.Item key={i.id} value={i}>
-                <FormBuilder props={i} />
-              </Reorder.Item>
-            ))}
-          </Reorder.Group>
+          <form onSubmit={formProvider.handleSubmit(onSubmit)}>
+            <div className="my-4">
+              <h2 className="text-lg">Insurance Type</h2>
+              <select
+                className="border w-xs sm:w-lg px-1 py-1"
+                {...formProvider.register("insuranceType")}
+              >
+                {getFormsData?.map((i, index) => (
+                  <option key={index} value={i.formId}>
+                    {i.title}
+                  </option>
+                ))}
+              </select>
+            </div>
 
-          <button
-            className="px-10 py-4 bg-green-400 transition-colors rounded-sm hover:bg-green-500 active:bg-green-500 focus:bg-green-500 cursor-pointer"
-            type="submit"
-          >
-            {translations[language].submit}
-          </button>
-        </form>
+            <Reorder.Group
+              axis="y"
+              values={formFields}
+              onReorder={setFormFields}
+            >
+              {formFields.map((i) => (
+                <Reorder.Item key={i.id} value={i}>
+                  <FormBuilder props={i} />
+                </Reorder.Item>
+              ))}
+            </Reorder.Group>
+
+            <button
+              className="px-10 py-4 bg-green-400 transition-colors rounded-sm hover:bg-green-500 active:bg-green-500 focus:bg-green-500 cursor-pointer"
+              type="submit"
+            >
+              {translations[language].submit}
+            </button>
+          </form>
+        </div>
       </FormProvider>
     </div>
   );

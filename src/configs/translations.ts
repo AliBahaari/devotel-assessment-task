@@ -17,6 +17,7 @@ export const translations = {
     minimum_is: "minimum is",
     maximum_is: "maximum is",
     welcome: "Welcome",
+    which_columns_to_display: "Which columns to display",
   },
   ge: {
     darkMode: "Dunkelmodus",
@@ -36,5 +37,6 @@ export const translations = {
     minimum_is: "minimum ist",
     maximum_is: "maximum ist",
     welcome: "Willkommen",
+    which_columns_to_display: "Welche Spalten sollen angezeigt werden",
   },
 };

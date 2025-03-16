@@ -69,85 +69,87 @@ export function DataTable<TData, TValue>({
   };
 
   return (
-    <div>
-      <table className="w-full">
-        <thead>
-          {table.getHeaderGroups().map((headerGroup) => (
-            <tr key={headerGroup.id}>
-              {headerGroup.headers.map((header) => {
-                return (
-                  <th
-                    key={header.id}
-                    className={`text-center text-[14px] ${darkMode ? "text-white" : "text-[#707070]"}`}
-                    onClick={header.column.getToggleSortingHandler()}
-                    style={{
-                      cursor: header.column.getCanSort()
-                        ? "pointer"
-                        : "default",
-                    }}
-                  >
-                    <span>
-                      {header.isPlaceholder
-                        ? null
-                        : flexRender(
-                            header.column.columnDef.header,
-                            header.getContext(),
-                          )}
-                    </span>
-                    <span> / </span>
-                    <span>
-                      {header.column.getIsSorted() === "desc"
-                        ? " 🔼"
-                        : header.column.getIsSorted() === "asc"
-                          ? " 🔽"
-                          : translations[language].sort}
-                    </span>
-                  </th>
-                );
-              })}
-            </tr>
-          ))}
-        </thead>
-
-        <tbody>
-          {isLoading ? (
-            <tr>
-              <td colSpan={columns.length} className="py-4 text-center">
-                {translations[language].loading}...
-              </td>
-            </tr>
-          ) : table.getRowModel().rows.length ? (
-            table.getRowModel().rows.map((row) => (
-              <tr
-                key={row.id}
-                data-state={row.getIsSelected() && "selected"}
-                className={`${rowClassName} border-b-[1px] border-solid border-gray-400`}
-              >
-                {row.getVisibleCells().map((cell) => (
-                  <td key={cell.id} className={`${cellClassName}`}>
-                    <div className="my-3 line-clamp-2 text-center">
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext(),
-                      )}
-                    </div>
-                  </td>
-                ))}
+    <>
+      <div className="overflow-x-auto">
+        <table className="w-full">
+          <thead>
+            {table.getHeaderGroups().map((headerGroup) => (
+              <tr key={headerGroup.id}>
+                {headerGroup.headers.map((header) => {
+                  return (
+                    <th
+                      key={header.id}
+                      className={`text-center text-[14px] ${darkMode ? "text-white" : "text-[#707070]"}`}
+                      onClick={header.column.getToggleSortingHandler()}
+                      style={{
+                        cursor: header.column.getCanSort()
+                          ? "pointer"
+                          : "default",
+                      }}
+                    >
+                      <span>
+                        {header.isPlaceholder
+                          ? null
+                          : flexRender(
+                              header.column.columnDef.header,
+                              header.getContext(),
+                            )}
+                      </span>
+                      <span> / </span>
+                      <span>
+                        {header.column.getIsSorted() === "desc"
+                          ? " 🔼"
+                          : header.column.getIsSorted() === "asc"
+                            ? " 🔽"
+                            : translations[language].sort}
+                      </span>
+                    </th>
+                  );
+                })}
               </tr>
-            ))
-          ) : (
-            <tr>
-              <td colSpan={columns.length} className="py-4 text-center">
-                {translations[language].nothing}!
-              </td>
-            </tr>
-          )}
-        </tbody>
-      </table>
+            ))}
+          </thead>
+
+          <tbody>
+            {isLoading ? (
+              <tr>
+                <td colSpan={columns.length} className="py-4 text-center">
+                  {translations[language].loading}...
+                </td>
+              </tr>
+            ) : table.getRowModel().rows.length ? (
+              table.getRowModel().rows.map((row) => (
+                <tr
+                  key={row.id}
+                  data-state={row.getIsSelected() && "selected"}
+                  className={`${rowClassName} border-b-[1px] border-solid border-gray-400`}
+                >
+                  {row.getVisibleCells().map((cell) => (
+                    <td key={cell.id} className={`${cellClassName}`}>
+                      <div className="my-3 line-clamp-2 text-center">
+                        {flexRender(
+                          cell.column.columnDef.cell,
+                          cell.getContext(),
+                        )}
+                      </div>
+                    </td>
+                  ))}
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan={columns.length} className="py-4 text-center">
+                  {translations[language].nothing}!
+                </td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+      </div>
 
       {totalRows > pageSize && (
         <div
-          className={`${darkMode ? "bg-slate-400" : "bg-slate-100"} grid grid-cols-3 space-x-2 px-[20px] py-[16px]`}
+          className={`${darkMode ? "bg-slate-400" : "bg-slate-100"} w-full flex flex-col sm:flex-row items-center justify-between gap-10 px-[20px] py-[16px]`}
         >
           <div className="flex flex-row items-center gap-2 text-[14px]">
             <span>{translations[language].page}</span>
@@ -191,6 +193,6 @@ export function DataTable<TData, TValue>({
           </div>
         </div>
       )}
-    </div>
+    </>
   );
 }

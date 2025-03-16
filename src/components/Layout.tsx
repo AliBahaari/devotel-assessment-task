@@ -39,7 +39,7 @@ function Layout() {
 
   return (
     <div
-      className={`${darkMode ? "bg-slate-600 text-white" : "bg-white text-black"} min-h-screen p-10`}
+      className={`${darkMode ? "bg-slate-600 text-white" : "bg-white text-black"} min-h-screen p-2 sm:p-10`}
     >
       <div className="flex flex-row items-center justify-between">
         <div className="flex flex-row items-center gap-2">
