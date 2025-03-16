@@ -55,3 +55,8 @@ export function useGetDynamicData({
 
 Check the project out here:
 [Demo](https://devotel-assessment-task.vercel.app)
+
+## Contributing
+
+Notice, this project contains _Husky_, _Lint Staged_, _ESLint_, _Prettier_, _CommitLint_, etc.
+So, take it easy to contribute safely!
