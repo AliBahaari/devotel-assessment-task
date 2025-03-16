@@ -9,6 +9,7 @@ import { Reorder } from "motion/react";
 import { translations } from "../../configs/translations";
 import { useLocalizationStore } from "../../stores/useLocalizationStore";
 import { useDarkModeStore } from "../../stores/useDarkModeStore";
+import { useLocation } from "react-router";
 
 function Submit() {
   const darkMode = useDarkModeStore((state) => state.darkMode);
@@ -20,6 +21,8 @@ function Submit() {
   const { mutateAsync: postFormsSubmit, isPending: postFormsSubmitIsPending } =
     usePostFormsSubmit();
 
+  const location = useLocation();
+
   const formProvider = useForm({
     mode: "onChange",
     defaultValues: {
@@ -30,7 +33,7 @@ function Submit() {
 
   useEffect(() => {
     formProvider.setValue("insuranceType", getFormsData?.[0]?.formId || "");
-  }, [formProvider, getFormsData]);
+  }, [formProvider, getFormsData, location]);
 
   const { insuranceType } = useWatch({
     control: formProvider.control,
