@@ -39,45 +39,52 @@ function Layout() {
 
   return (
     <div
-      className={`${darkMode ? "bg-slate-600 text-white" : "bg-white text-black"} min-h-screen`}
+      className={`${darkMode ? "bg-slate-600 text-white" : "bg-white text-black"} min-h-screen p-10`}
     >
-      <div>
-        <span>{translations[language].darkMode}</span>
-        <input
-          type="checkbox"
-          checked={darkMode}
-          onChange={() => toggleDarkMode()}
-        />
+      <div className="flex flex-row items-center justify-between">
+        <div className="flex flex-row items-center gap-2">
+          <span className="text-sm">{translations[language].darkMode}</span>
+          <input
+            type="checkbox"
+            checked={darkMode}
+            onChange={() => toggleDarkMode()}
+          />
+        </div>
+
+        <div className="flex flex-row items-center gap-2">
+          {availableLanguages.map((i, index) => (
+            <div
+              key={index}
+              className={`${language === i.code && "border-b-2 border-b-green-500 pb-2"} cursor-pointer`}
+              onClick={() =>
+                changeLanguage(i.code as LocalizationState["language"])
+              }
+            >
+              <img src={`/${i.image}`} width={32} height={32} />
+            </div>
+          ))}
+        </div>
       </div>
 
-      <div className="flex flex-row items-center gap-2">
-        {availableLanguages.map((i, index) => (
-          <div
-            key={index}
-            className={`${language === i.code && "border-b-2 border-b-green-500 pb-2"} cursor-pointer`}
-            onClick={() =>
-              changeLanguage(i.code as LocalizationState["language"])
-            }
-          >
-            <img src={`/${i.image}`} width={32} height={32} />
-          </div>
-        ))}
-      </div>
+      <h1 className="text-3xl mt-4 font-black">
+        {translations[language].welcome}!
+      </h1>
 
-      <h1>{translations[language].welcome}</h1>
-      <div className="flex flex-row items-center justify-center gap-6">
+      <div className="flex flex-row items-center justify-center gap-6 mt-4">
         {buttonLinks.map((i, index) => (
           <button
             key={index}
             className={`${location.pathname === i.href && "bg-blue-400 text-white"} w-sm bg-blue-200 text-black rounded-sm font-medium cursor-pointer py-3 px-6`}
             onClick={() => navigate(i.href)}
           >
-            {i.text}
+            {translations[language][i.text.toLowerCase() as "submit" | "list"]}
           </button>
         ))}
       </div>
 
-      <Outlet />
+      <div className="mt-10">
+        <Outlet />
+      </div>
     </div>
   );
 }

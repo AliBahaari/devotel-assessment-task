@@ -54,7 +54,16 @@ function Submit() {
   };
 
   return (
-    <>
+    <div className="flex flex-col items-center">
+      <div>
+        {Object.values(formProvider.formState.errors).length > 0 &&
+          Object.values(formProvider.formState.errors).map((i, index) => (
+            <p key={index} className="text-red-500 text-sm">
+              {String(i?.message)}
+            </p>
+          ))}
+      </div>
+
       <FormProvider {...formProvider}>
         <form onSubmit={formProvider.handleSubmit(onSubmit)}>
           <div className="my-4">
@@ -80,23 +89,14 @@ function Submit() {
           </Reorder.Group>
 
           <button
-            className="px-10 py-4 bg-green-400 transition-colors hover:bg-green-500 active:bg-green-500 focus:bg-green-500 cursor-pointer"
+            className="px-10 py-4 bg-green-400 transition-colors rounded-sm hover:bg-green-500 active:bg-green-500 focus:bg-green-500 cursor-pointer"
             type="submit"
           >
             {translations[language].submit}
           </button>
         </form>
       </FormProvider>
-
-      <div className="py-10">
-        {Object.values(formProvider.formState.errors).length > 0 &&
-          Object.values(formProvider.formState.errors).map((i, index) => (
-            <p key={index} className="text-red-500 text-sm">
-              {String(i?.message)}
-            </p>
-          ))}
-      </div>
-    </>
+    </div>
   );
 }
 

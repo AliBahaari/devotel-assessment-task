@@ -80,7 +80,7 @@ function FormBuilder({ props }: FormBuilderProps) {
       <>
         <h2 className="text-lg">{props.label}</h2>
         <select
-          className={`border min-w-sm px-1 py-1 ${darkMode && "text-black border-white"}`}
+          className={`border min-w-sm px-1 py-1 ${darkMode && "text-gray-400 border-white"}`}
           {...register(props.id, {
             required: {
               value: props.required,

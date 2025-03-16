@@ -95,40 +95,54 @@ function List() {
 
   return (
     <>
-      {getFormsSubmissionsData?.columns.map((i, index) => (
-        <div key={index} className="flex flex-row items-center gap-1">
-          <label>{i}</label>
-          <input
-            type="checkbox"
-            value={i}
-            onChange={(event) => handleSelectedColumns(event)}
-            checked={selectedColumns.some(
-              (j) => i === j.value && j.checked === true,
-            )}
-          />
+      <div className="flex flex-row items-center justify-between">
+        <div className="flex flex-col">
+          <span className="font-medium">Which columns to display?</span>
+          <div>
+            {getFormsSubmissionsData?.columns.map((i, index) => (
+              <div
+                key={index}
+                className="flex flex-row items-center justify-between gap-2"
+              >
+                <label className="text-sm">{i}</label>
+                <input
+                  type="checkbox"
+                  value={i}
+                  onChange={(event) => handleSelectedColumns(event)}
+                  checked={selectedColumns.some(
+                    (j) => i === j.value && j.checked === true,
+                  )}
+                />
+              </div>
+            ))}
+          </div>
         </div>
-      ))}
-      <input
-        type="text"
-        className="border min-w-sm px-1 py-1"
-        placeholder={translations[language].search}
-        onChange={(event) => setSearch(event.target.value)}
-      />
-      <DataTable
-        columns={columns || []}
-        data={data || []}
-        isLoading={getFormsSubmissionsIsFetching}
-        totalRows={
-          search.length > 0
-            ? data?.length
-            : getFormsSubmissionsData?.data.length
-        }
-        currentPage={pageNumber}
-        pageSize={
-          search.length > 0 ? getFormsSubmissionsData?.data.length : PAGE_SIZE
-        }
-        onPageChange={(pageNumber) => setPageNumber(pageNumber)}
-      />
+
+        <input
+          type="text"
+          className="border min-w-sm px-1 py-1"
+          placeholder={`${translations[language].search}...`}
+          onChange={(event) => setSearch(event.target.value)}
+        />
+      </div>
+
+      <div className="mt-10">
+        <DataTable
+          columns={columns || []}
+          data={data || []}
+          isLoading={getFormsSubmissionsIsFetching}
+          totalRows={
+            search.length > 0
+              ? data?.length
+              : getFormsSubmissionsData?.data.length
+          }
+          currentPage={pageNumber}
+          pageSize={
+            search.length > 0 ? getFormsSubmissionsData?.data.length : PAGE_SIZE
+          }
+          onPageChange={(pageNumber) => setPageNumber(pageNumber)}
+        />
+      </div>
     </>
   );
 }

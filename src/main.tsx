@@ -7,7 +7,13 @@ import List from "./pages/List/List.tsx";
 import "./index.css";
 import Layout from "./components/Layout.tsx";
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+    },
+  },
+});
 
 createRoot(document.getElementById("root")!).render(
   <BrowserRouter>
